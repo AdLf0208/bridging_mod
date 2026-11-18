@@ -1,0 +1,23 @@
+[package]
+# Port of Bridging Mod 2.7.0 (squeeglii/BridgingMod, MIT). Minecraft Java 26.3; the
+# port targets the Horizon SDK nightly pinned in horizon-mod.toml. Clean-room Rust
+# rewrite from the mod's behaviour (see notes.md and FINDINGS.md); local-only until
+# the maintainer approves publishing (ARCHITECTURE.md §8).
+#
+# Cargo's name and version are not the mod's identity: horizon-mod.toml is.
+name = "bridgingmod"
+version = "0.2.0"
+edition = "2024"
+license = "MIT"
+description = "Bridging Mod for Horizon: reach-around block placement into the gap the player looks into"
+publish = false
+
+[lib]
+# The pure target model is `src/runtime.rs`; the crate root is `src/lib.rs`.
+path = "src/lib.rs"
+
+[dependencies]
+# The pinned SDK's API crate, fetched into .horizon/sdk/ by any `cargo horizon-mod`
+# command (the launcher builds against its own copy of the same build). This port
+# adds no registry dependency of its own.
+horizon-mod-api = { path = ".horizon/sdk/api/crates/horizon-mod-api" }
